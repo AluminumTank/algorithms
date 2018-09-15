@@ -1,4 +1,5 @@
 #include <iostream>
+#include <climits>
 #include <ctime>
 #include <vector>
 
@@ -8,24 +9,39 @@ void mergeSort(int * A, int p, int q, int r);
 
 int main() {
 	int arrSize[11] = {100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000};
-	printf("Insertion Sort\n");
-	srand(clock());
+	printf("Merge Sort\n");
 	for(int i = 0; i < 11; ++i) {
 
+		srand(clock());
 		int * A = new int[arrSize[i]];
+		int * check = new int[10000];
+		for(int j = 0; j < 10000; ++j) {
+			check[j] = 0;
+		}
 		for(int j = 0; j < arrSize[i]; ++j) {
-			A[j] = rand();
-//			cout << A[j] << '\n';
+			A[j] = rand() % 10000;
+			check[A[j]]++;
+		}
+		clock_t start = clock();
+		mergeSort(A, 0, (arrSize[i] - 1) / 2, arrSize[i] - 1);
+		clock_t end = clock();
+		for(int j = 0; j < arrSize[i]; ++j) {
+			check[A[j]]--;
+			if(j != arrSize[i] - 1 && A[j] > A[j + 1]) {
+				printf("WRONG: %i: %i: %i", j, A[j], A[j + 1]);
+			}
+			//printf("%i,%i\n", j, A[j]);
+		}
+		for(int j = 0; j < 10000; ++j) {
+			if(check[j] != 0) {
+				printf("WRONG\n");
+			}
 		}
 		string tmp;
 		getline(cin, tmp);
-		clock_t init = clock();
-		mergeSort(A, 0, (arrSize[i] - 1) / 2, arrSize[i] - 1);
-		for(int j = 0; j < arrSize[i]; ++j) {
-			cout << A[j] << '\n';
-		}
-		float runtime = static_cast<float>(clock() - init) / static_cast<float>(CLOCKS_PER_SEC);
+		double runtime = double(end - start) / CLOCKS_PER_SEC;
 		printf("%i,%f\n", arrSize[i], runtime);
+		delete[] A;
 	}
 	string tmp;
 	getline(cin, tmp);
@@ -60,5 +76,7 @@ void mergeSort(int * A, int p, int q, int r) {
 				++j;
 			}
 		}
+		delete[] L;
+		delete[] R;
 	}
 }
