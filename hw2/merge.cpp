@@ -1,11 +1,8 @@
 #include <iostream>
+#include <climits>
 #include <ctime>
 #include <vector>
-#include <stdint.h>
-#include <stdio.h>
-#include <iostream>
 #include <string>
-#include <chrono>
 
 using namespace std;
 
@@ -18,17 +15,33 @@ int main() {
 
 		srand(clock());
 		int * A = new int[arrSize[i]];
-		for(int j = 0; j < arrSize[i]; ++j) {
-			A[j] = rand();
+		int * check = new int[10000];
+		for(int j = 0; j < 10000; ++j) {
+			check[j] = 0;
 		}
-
-		auto init = chrono::high_resolution_clock::now();
-		mergeSort(A, 0, (i - 1) / 2, i - 1);
-		auto end = chrono::high_resolution_clock::now();
-		auto duration1 = end - init;
-		int sec = chrono::duration_cast<chrono::seconds>(duration1).count();
-		int nano = chrono::duration_cast<chrono::nanoseconds>(duration1).count() % 1000000000;
-		printf("%i, %i.%09i\n", arrSize[i], sec, nano);
+		for(int j = 0; j < arrSize[i]; ++j) {
+			A[j] = rand() % 10000;
+			check[A[j]]++;
+		}
+		clock_t start = clock();
+		mergeSort(A, 0, (arrSize[i] - 1) / 2, arrSize[i] - 1);
+		clock_t end = clock();
+		for(int j = 0; j < arrSize[i]; ++j) {
+			check[A[j]]--;
+			if(j != arrSize[i] - 1 && A[j] > A[j + 1]) {
+				printf("WRONG: %i: %i: %i", j, A[j], A[j + 1]);
+			}
+			//printf("%i,%i\n", j, A[j]);
+		}
+		for(int j = 0; j < 10000; ++j) {
+			if(check[j] != 0) {
+				printf("WRONG\n");
+			}
+		}
+		string tmp;
+		getline(cin, tmp);
+		double runtime = double(end - start) / CLOCKS_PER_SEC;
+		printf("%i,%f\n", arrSize[i], runtime);
 		delete[] A;
 	}
 	string tmp;
