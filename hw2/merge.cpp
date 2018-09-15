@@ -1,35 +1,33 @@
 #include <iostream>
 #include <ctime>
 #include <vector>
+#include <string>
 
 using namespace std;
 
 void mergeSort(int * A, int p, int q, int r);
 
-int main() {
-	int arrSize[11] = {100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000};
-	printf("Insertion Sort\n");
-	srand(clock());
-	for(int i = 0; i < 11; ++i) {
-
-		int * A = new int[arrSize[i]];
-		for(int j = 0; j < arrSize[i]; ++j) {
-			A[j] = rand();
-//			cout << A[j] << '\n';
-		}
-		string tmp;
-		getline(cin, tmp);
-		clock_t init = clock();
-		mergeSort(A, 0, (arrSize[i] - 1) / 2, arrSize[i] - 1);
-		for(int j = 0; j < arrSize[i]; ++j) {
-			cout << A[j] << '\n';
-		}
-		float runtime = static_cast<float>(clock() - init) / static_cast<float>(CLOCKS_PER_SEC);
-		printf("%i,%f\n", arrSize[i], runtime);
-	}
-	string tmp;
-	getline(cin, tmp);
-}
+//int main() {
+//	int arrSize[11] = {100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000};
+//	printf("Merge Sort\n");
+//	srand(clock());
+//	for(int i = 0; i < 11; ++i) {
+//
+//		int * A = new int[arrSize[i]];
+//		for(int j = 0; j < arrSize[i]; ++j) {
+//			A[j] = rand();
+////			cout << A[j] << '\n';
+//		}
+//		int init = clock();
+//		mergeSort(A, 0, (arrSize[i] - 1) / 2, arrSize[i] - 1);
+//
+//		float runtime = static_cast<float>(clock() - init) / static_cast<float>(CLOCKS_PER_SEC);
+//		printf("%i,%f\n", arrSize[i], runtime);
+//		delete [] A;
+//	}
+//	string tmp;
+//	getline(cin, tmp);
+//}
 
 void mergeSort(int * A, int p, int q, int r) {
 	if(p < r) {
@@ -60,5 +58,7 @@ void mergeSort(int * A, int p, int q, int r) {
 				++j;
 			}
 		}
+		delete[] L;
+		delete[] R;
 	}
 }

@@ -11,7 +11,7 @@ using namespace std;
 
 void insertionSort(vector<uint16_t> &A);
 
-int main() {
+/*int main() {
 	int runningTimes[11] = {100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000};
 	printf("Insertion Sort\n");
 	for(int i = 0; i < 11; ++i) {
@@ -33,7 +33,7 @@ int main() {
 	}
 	string tmp;
 	getline(cin, tmp);
-}
+}*/
 
 void insertionSort(vector<uint16_t> &A) {
 	for(int i = 1; i < A.size(); ++i) {
