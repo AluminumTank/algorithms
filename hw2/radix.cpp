@@ -12,8 +12,6 @@
 using namespace std;
 
 void radixSort(uint16_t * A, uint16_t digit, int len);
-void quickSort(uint16_t arr[], int low, int high);
-
 
 /*int main() {
 	int runningTimes[11] = {100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000};
