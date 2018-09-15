@@ -13,43 +13,40 @@ using namespace std;
 
 void radixSort(uint16_t * A, uint16_t digit, int len);
 
-/*int main() {
-	int runningTimes[11] = {100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000};
+int main() {
+	int arrSize[11] = {100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000};
 	printf("Radix Sort\n");
 	for(int i = 0; i < 11; ++i) {
+		// Create the Array to be sorted with random data
 		srand(clock());
-		uint16_t * A = new uint16_t[runningTimes[i]];
-		uint16_t * B = new uint16_t[runningTimes[i]];
-		for(int j = 0; j < runningTimes[i]; ++j) {
+		uint16_t * A = new uint16_t[arrSize[i]];
+		for(int j = 0; j < arrSize[i]; ++j) {
 			A[j] = rand();
-			B[j] = A[j];
 		}
+		// Get the start time
 		auto init = chrono::high_resolution_clock::now();
-		radixSort(A, 16, runningTimes[i]);
+		// Run the algorithm
+		radixSort(A, 16, arrSize[i]);
+		// Get the end time
 		auto end = chrono::high_resolution_clock::now();
-		auto duration1 = end - init;
-		int sec1 = chrono::duration_cast<chrono::seconds>(duration1).count();
-		int nano1 = chrono::duration_cast<chrono::nanoseconds>(duration1).count() % 1000000000;
+		// Calculate the elepsed time
+		auto duration = end - init;
+		int sec = chrono::duration_cast<chrono::seconds>(duration).count();
+		int nano = chrono::duration_cast<chrono::nanoseconds>(duration).count() % 1000000000;
 
-		printf("%i, %i.%09i\n", runningTimes[i], sec1, nano1);
-		for (int j = 1; j < runningTimes[i]; j++) {
-			//cout << A[j] << ", ";
+		printf("%i, %i.%09i\n", arrSize[i], sec, nano);
+		// Make sure the output was sorted
+		for (int j = 1; j < arrSize[i]; j++) {
 			if (A[j] < A[j - 1]) {
-				cout << "WRONGA " << j;
-			}
-		}
-		for (int j = 1; j < runningTimes[i]; j++) {
-			//cout << A[j] << ", ";
-			if (B[j] < B[j - 1]) {
-				cout << "WRONGB " << j;
+				cout << "WRONG " << j;
 			}
 		}
 		delete[] A;
-		delete[] B;
 	}
+	// Wait for user input.
 	string tmp;
 	getline(cin, tmp);
-}*/
+}
 
 void radixSort(uint16_t * A, uint16_t digit, int len) {
 	if (len > 1 && digit > 0) {
@@ -58,18 +55,20 @@ void radixSort(uint16_t * A, uint16_t digit, int len) {
 		for (int i = 0; i < len; ++i) {
 			// Check if the digit bit is zero
 			if (!(A[i] & (1 << digit - 1))) {
+				// Put the item into the zero "Bin"
 				swap(A[zeroTop], A[i]);
 				zeroTop++;
 				oneTop++;
 			}
 			else {
+				// Put the item into the one "Bin"
 				swap(A[zeroTop], A[i]);
 				oneTop++;
 			}
 
 		}
 
-		// sort the next for the zero set and the ones set
+		// Sort the next digit for items in the zero "Bin" and the one "Bin"
 		radixSort(A, digit - 1, zeroTop);
 		radixSort(A + zeroTop, digit - 1, len - zeroTop);
 	}
