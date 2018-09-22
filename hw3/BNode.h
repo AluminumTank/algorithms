@@ -6,18 +6,19 @@ template <class T>
 class BNode {
 	public:
 		BNode();
-		BNode(T key);
+		BNode(T newKey);
 
-		BNode<T> getParent();
-		BNode<T> getRight();
-		BNode<T> getLeft();
+		BNode<T> * getParent();
+		BNode<T> * getRight();
+		BNode<T> * getLeft();
 
-		BNode<T> setParent();
-		BNode<T> setRight();
-		BNode<T> setLeft();
+		void setParent(BNode<T> * newParent);
+		void setRight(BNode<T> * newRight);
+		void setLeft(BNode<T> * newLeft);
 
 	private:
-		BNode<T> * parent;
-		BNode<T> * right;
-		BNode<T> * left;
+		BNode<T> * parent = NULL;
+		BNode<T> * right = NULL;
+		BNode<T> * left = NULL;
+		T key = NULL;
 }
