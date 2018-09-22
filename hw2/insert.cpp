@@ -14,6 +14,8 @@ void insertionSort(vector<uint16_t> &A);
 
 int main() {
 	int arrSize[11] = {100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000};
+	string tmp;
+	getline(cin, tmp);
 	printf("Insertion Sort\n");
 	for(int i = 0; i < 11; ++i) {
 		// Create the Array to be sorted with random data
@@ -42,7 +44,7 @@ int main() {
 		}
 	}
 	// Wait for user input.
-	string tmp;
+	//string tmp;
 	getline(cin, tmp);
 }
 
