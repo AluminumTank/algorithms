@@ -43,7 +43,16 @@ void BinarySearchTree<T>::removeNode(BNode<T>* subRoot, BNode<T>* val) {
 		transplant(val, val->getLeft());
 	}
 	else {
-		BNode<T> * y = getMinimum(subroot);
+		BNode<T> * y = getMinimum(subroot->getRight());
+		if (y->getParent() != val) {
+			transplant(y, y->getRight());
+			y->setRight(val->getRight());
+			y->getRight()->setParent(y);
+		}
+
+		transplant(val, y);
+		y->setLeft(val->getLeft());
+		y->getLeft()->setParent(y);
 	}
 }
 
