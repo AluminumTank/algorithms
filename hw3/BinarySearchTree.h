@@ -23,6 +23,6 @@ public:
 	BNode<T> * getSentinel();
 
 private:
-	BNode<T> * root = NULL;
 	BNode<T> * sentinel = new BNode<T>(NULL);
+	BNode<T> * root = sentinel;
 };
