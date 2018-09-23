@@ -12,8 +12,8 @@ class BinarySearchTree {
 public:
 	BinarySearchTree() {}
 	~BinarySearchTree();
-	insertNode(BNode<T> * subRoot, T val);
-	removeNode(BNode<T> * subRoot, BNode<T> * val);
+	void insertNode(BNode<T> * subRoot, T val);
+	void removeNode(BNode<T> * subRoot, BNode<T> * val);
 	BNode<T> * getMinimum();
 	BNode<T> * getMaximum();
 	BNode<T> * search(T Key);
