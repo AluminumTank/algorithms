@@ -16,43 +16,93 @@ void BinarySearchTree<T>::removeNode(BNode<T>* subRoot, BNode<T>* val) {
 }
 
 template<class T>
-BNode<T>* BinarySearchTree<T>::getMinimum() {
-
-	return nullptr;
+BNode<T>* BinarySearchTree<T>::getMinimum(BNode<T> * subRoot) {
+	BNode<T> * x = subRoot;
+	while (x->getLeft() != sentinel) {
+		x = x->getLeft();
+	}
+	return x;
 }
 
 template<class T>
-BNode<T>* BinarySearchTree<T>::getMaximum() {
-
-	return nullptr;
+BNode<T>* BinarySearchTree<T>::getMaximum(BNode<T> * subRoot) {
+	BNode<T> * x = subRoot;
+	while (x->getRight() != sentinel) {
+		x = x->getRight();
+	}
+	return x;
 }
 
 template<class T>
-BNode<T>* BinarySearchTree<T>::search(T Key) {
+BNode<T>* BinarySearchTree<T>::search(BNode<T> * subRoot, T key) {
+	BNode<T> * x = subRoot;
+	if (x == sentinel || k == x->getKey()) {
+		return x;
+	}
 
-	return nullptr;
+	if (k < x->getKey()) {
+		return search(x->getLeft(), k);
+	} else {
+		return search(x->getRight(), k);
+	}
 }
 
 template<class T>
 BNode<T>* BinarySearchTree<T>::getSuccessor(BNode<T>* subRoot) {
+	BNode<T> * x = subRoot;
+	if (x->getRight() != sentinel) {
+		return x->getMinimum();
+	}
 
-	return nullptr;
+	BNode<T> * y = x.getParent();
+	while (y != sentinel && x != y->getLeft()) {
+		x = y;
+		y = y->getParent();
+	}
+	return y;
 }
 
 template<class T>
 BNode<T>* BinarySearchTree<T>::getPredecessor(BNode<T>* subRoot) {
+	BNode<T> * x = subRoot;
+	if (x->getRight() != sentinel) {
+		return xgetMaximum();
+	}
 
-	return nullptr;
+	BNode<T> * y = x->getParent();
+	while (y != sentinel && x != y->getRight()) {
+		x = y;
+		y = y->getParent();
+	}
+	return y;
 }
 
 template<class T>
 BNode<T>* BinarySearchTree<T>::getRoot() {
 
-	return nullptr;
+	return root;
 }
 
 template<class T>
 BNode<T>* BinarySearchTree<T>::getSentinel() {
 
-	return nullptr;
+	return sentinel;
+}
+
+template<class T>
+void transplant(BNode<T> * candidate, BNode<T> * donor) {
+	BNode<T> * parent = candidate.getParent();
+
+	// connect candidate parent and donor: determine whether candidate is left or right child
+	if (candidate == parent->getRight()) {
+		parent->setRight(donor);
+	} else {
+		parent->setLeft(donor);
+	}
+	donor->setParent(parent);
+
+	// connect candidate children and donor children
+	donor->setLeft(candidate->getLeft());
+	donor->setRight(candidate->getRight());
+
 }

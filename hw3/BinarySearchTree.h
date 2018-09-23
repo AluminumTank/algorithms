@@ -14,13 +14,14 @@ public:
 	~BinarySearchTree();
 	void insertNode(BNode<T> * subRoot, T val);
 	void removeNode(BNode<T> * subRoot, BNode<T> * val);
-	BNode<T> * getMinimum();
-	BNode<T> * getMaximum();
-	BNode<T> * search(T Key);
+	BNode<T> * getMinimum(BNode<T> * subRoot);
+	BNode<T> * getMaximum(BNode<T> * subRoot);
+	BNode<T> * search(BNode<T> * subRoot, T Key);
 	BNode<T> * getSuccessor(BNode<T> * subRoot);
 	BNode<T> * getPredecessor(BNode<T> * subRoot);
 	BNode<T> * getRoot();
 	BNode<T> * getSentinel();
+	void transplant(BNode<T> * candidate, BNode<T> * donor);
 
 private:
 	BNode<T> * root = NULL;
