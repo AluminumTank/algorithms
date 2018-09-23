@@ -7,33 +7,41 @@
 using namespace std;
 
 template <class T>
-class BNode {
+BNode<T>::BNode(T newKey) {
+	key = newKey;
+}
 
-	BNode(T newKey) {
-		key = newKey;
-	}
+template <class T>
+BNode<T> * BNode<T>::getParent() {
+	return parent;
+}
 
-	BNode<T> * getParent() {
-		return parent;
-	}
+template <class T>
+BNode<T> * BNode<T>::getRight() {
+	return right;
+}
 
-	BNode<T> * getRight() {
-		return right;
-	}
+template <class T>
+BNode<T> * BNode<T>::getLeft() {
+	return left;
+}
 
-	BNode<T> * getLeft() {
-		return left;
-	}
+template <class T>
+void BNode<T>::setParent(BNode<T> * newParent) {
+	parent = newParent;
+}
 
-	void setParent(BNode<T> * newParent) {
-		parent = newParent;
-	}
+template <class T>
+void BNode<T>::setRight(BNode<T> * newRight) {
+	right = newRight;
+}
 
-	void setRight(BNode<T> * newRight) {
-		right = newRight;
-	}
+template <class T>
+void BNode<T>::setLeft(BNode<T> * newLeft) {
+	left = newLeft;
+}
 
-	void setLeft(BNode<T> * newLeft) {
-		left = newLeft;
-	}
+template <class T>
+T BNode<T>::getKey() {
+	return key;
 }

@@ -16,9 +16,11 @@ class BNode {
 		void setRight(BNode<T> * newRight);
 		void setLeft(BNode<T> * newLeft);
 
+		T getKey();
+
 	private:
 		BNode<T> * parent = NULL;
 		BNode<T> * right = NULL;
 		BNode<T> * left = NULL;
 		T key = NULL;
-}
+};
