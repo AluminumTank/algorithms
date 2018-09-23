@@ -2,7 +2,7 @@
  * SUMMARY: An implementation of a binary search tree.
  *
  * AUTHOR: Daniel Parker
- * 
+ * DATE: Sept 22, 2018
  * 
 **/
 #include "BNode.h"
@@ -12,15 +12,17 @@ class BinarySearchTree {
 public:
 	BinarySearchTree() {}
 	~BinarySearchTree();
-	Insert(BNode<T> * SubRoot, T val);
-	Delete(BNode<T> * SubRoot, BNode<T> * val);
-	BNode<T> * Minimum();
-	BNode<T> * Maximum();
-	BNode<T> * Search(T Key);
-	BNode<T> * Successor(BNode<T> * SubRoot);
-	BNode<T> * Predecessor(BNode<T> * SubRoot);
-	BNode<T> * GetRoot();
+	insertNode(BNode<T> * subRoot, T val);
+	removeNode(BNode<T> * subRoot, BNode<T> * val);
+	BNode<T> * getMinimum();
+	BNode<T> * getMaximum();
+	BNode<T> * search(T Key);
+	BNode<T> * getSuccessor(BNode<T> * subRoot);
+	BNode<T> * getPredecessor(BNode<T> * subRoot);
+	BNode<T> * getRoot();
+	BNode<T> * getSentinel();
+
 private:
-	BNode<T> * Root = NULL;
-	BNode<T> * Sentinal = new BNode<T>(NULL);
+	BNode<T> * root = NULL;
+	BNode<T> * sentinel = new BNode<T>(NULL);
 };
