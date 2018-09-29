@@ -16,11 +16,18 @@ int main() {
 	BNode<int> * root = tree.getRoot();
 	tree.insertNode(root, 64);
 	if(tree.search(root, 64) == NULL) {
-		printf("insert failed");
+		printf("insert failed\n");
+	}
+	else {
+		printf("Insert succeded\n");
 	}
 
 	// test search
 	if(tree.search(root, 102) != tree.getSentinel()) {
-		printf("search failed");
+		printf("search failed\n");
 	}
+	else {
+		printf("search succeded\n");
+	}
+	return 0;
 }
