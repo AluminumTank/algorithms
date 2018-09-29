@@ -6,8 +6,10 @@
 #include <cstddef>
 #include "BNode.h"
 
-#define RED false
-#define BLACK true
+#define RED 0
+#define RED_BLACK 1
+#define BLACK 2
+#define BLACK_BLACK 3
 
 using namespace std;
 
@@ -15,20 +17,27 @@ template <class T>
 class RBNode : public BNode<T> {
 public:
 	RBNode() {}
-	RBNode(T newKey, bool isBlack);
+	RBNode(T newKey, int newColor);
 
-	bool getColor();
+	int getColor();
+
+	void setColor(int newColor);
 
 private:
-	bool color = RED;
+	int color = RED;
 };
 
 template <class T>
-RBNode<T>::RBNode(T newKey, bool isBlack) : BNode(newKey) {
-	color = isBlack;
+RBNode<T>::RBNode(T newKey, int newColor) : BNode(newKey) {
+	color = newColor;
 }
 
 template <class T>
 void RBNode<T>::getColor() {
 	return color;
+}
+
+template <class T>
+void setColor(int newColor) {
+	color = newColor;
 }
