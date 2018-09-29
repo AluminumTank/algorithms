@@ -28,6 +28,8 @@ public:
 	BNode<T> * getSentinel();
 	void transplant(BNode<T> * candidate, BNode<T> * donor);
 
+protected:
+	void insertNode(BNode<T> * subRoot, BNode<T> z);
 private:
 	BNode<T> * sentinel = new BNode<T>(NULL);
 	BNode<T> * root = sentinel;
@@ -43,29 +45,7 @@ BinarySearchTree<T>::~BinarySearchTree() {
 template<class T>
 void BinarySearchTree<T>::insertNode(BNode<T>* subRoot, T val) {
 	BNode<T> z(val);
-	BNode<T> * y = sentinel;
-	BNode<T> * x = subRoot;
-
-	while (x != sentinel) {
-		y = x;
-		if (z.getKey() < x->getKey()) {
-			x = x->getLeft();
-		}
-		else {
-			x = x->getRight();
-		}
-	}
-
-	z.setParent(y);
-	if (y == sentinel) {
-		subRoot = &z;
-	}
-	else if (z.getKey() < y->getKey()) {
-		y->setLeft(&z);
-	}
-	else {
-		y->setRight(&z);
-	}
+	insertNode(subRoot, z);
 }
 
 template<class T>
@@ -182,6 +162,33 @@ void BinarySearchTree<T>::transplant(BNode<T> * candidate, BNode<T> * donor) {
 	donor->setLeft(candidate->getLeft());
 	donor->setRight(candidate->getRight());
 
+}
+
+template<class T>
+void BinarySearchTree<T>::insertNode(BNode<T>* subRoot, BNode<T> z) {
+	BNode<T> * y = sentinel;
+	BNode<T> * x = subRoot;
+
+	while (x != sentinel) {
+		y = x;
+		if (z.getKey() < x->getKey()) {
+			x = x->getLeft();
+		}
+		else {
+			x = x->getRight();
+		}
+	}
+
+	z.setParent(y);
+	if (y == sentinel) {
+		subRoot = &z;
+	}
+	else if (z.getKey() < y->getKey()) {
+		y->setLeft(&z);
+	}
+	else {
+		y->setRight(&z);
+	}
 }
 
 

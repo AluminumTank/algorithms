@@ -5,25 +5,38 @@
  * DATE: Sept 22, 2018
  *
 **/
-#include "BNode.h"
+#include "RBNode.h"
+#include "BinarySearchTree.h"
 
 template <class T>
-class RedBlack {
+class RedBlackTree : public BinarySearchTree<T>{
 public:
-	BinarySearchTree() {}
-	~BinarySearchTree();
-	void insertNode(BNode<T> * subRoot, T val);
-	void removeNode(BNode<T> * subRoot, BNode<T> * val);
-	BNode<T> * getMinimum(BNode<T> * subRoot);
-	BNode<T> * getMaximum(BNode<T> * subRoot);
-	BNode<T> * search(BNode<T> * subRoot, T Key);
-	BNode<T> * getSuccessor(BNode<T> * subRoot);
-	BNode<T> * getPredecessor(BNode<T> * subRoot);
-	BNode<T> * getRoot();
-	BNode<T> * getSentinel();
-	void transplant(BNode<T> * candidate, BNode<T> * donor);
+	RedBlackTree() {}
+	~RedBlackTree();
+	void insertNode(BNode<T> * subRoot, T val) override;
+	void removeNode(BNode<T> * subRoot, BNode<T> * val) override;
 
 private:
+
+
 	BNode<T> * sentinel = new BNode<T>(NULL);
 	BNode<T> * root = sentinel;
 };
+
+
+template<class T>
+inline RedBlackTree<T>::~RedBlackTree() {
+	delete sentinel;
+	delete root;
+}
+
+template<class T>
+void RedBlackTree<T>::insertNode(BNode<T>* subRoot, T val) {
+	
+	BinarySearchTree<T>::insertNode(subroot, val);
+}
+
+template<class T>
+void RedBlackTree<T>::removeNode(BNode<T>* subRoot, BNode<T>* val) {
+	
+}
