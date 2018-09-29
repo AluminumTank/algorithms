@@ -18,7 +18,7 @@ public:
 	BinarySearchTree() {}
 	~BinarySearchTree();
 	void insertNode(BNode<T> * subRoot, T val);
-	void removeNode(BNode<T> * subRoot, BNode<T> * val);
+	BNode<T> * removeNode(BNode<T> * subRoot, BNode<T> * val);
 	BNode<T> * getMinimum(BNode<T> * subRoot);
 	BNode<T> * getMaximum(BNode<T> * subRoot);
 	BNode<T> * search(BNode<T> * subRoot, T Key);
@@ -49,12 +49,15 @@ void BinarySearchTree<T>::insertNode(BNode<T>* subRoot, T val) {
 }
 
 template<class T>
-void BinarySearchTree<T>::removeNode(BNode<T>* subRoot, BNode<T>* val) {
+BNode<T> BinarySearchTree<T>::removeNode(BNode<T> * subRoot, BNode<T> * val) {
+	BNode<T> * y;
 	if (val->getLeft() == sentinel) {
 		transplant(val, val->getRight());
+		y = val;
 	}
 	else if (val->getRight() == sentinel) {
 		transplant(val, val->getLeft());
+		y = val;
 	}
 	else {
 		BNode<T> * y = getMinimum(subRoot->getRight());
@@ -68,6 +71,8 @@ void BinarySearchTree<T>::removeNode(BNode<T>* subRoot, BNode<T>* val) {
 		y->setLeft(val->getLeft());
 		y->getLeft()->setParent(y);
 	}
+
+	return y;
 }
 
 template<class T>
