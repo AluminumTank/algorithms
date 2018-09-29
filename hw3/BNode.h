@@ -10,7 +10,7 @@ using namespace std;
 template <class T>
 class BNode {
 	public:
-		BNode();
+		BNode() {}
 		BNode(T newKey);
 
 		BNode<T> * getParent();
@@ -30,5 +30,5 @@ class BNode {
 		T key = NULL;
 };
 
-#include "BNode.cpp"
+#include "BNode.tpp"
 #endif

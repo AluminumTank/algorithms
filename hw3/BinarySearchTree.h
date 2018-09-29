@@ -33,5 +33,5 @@ private:
 	BNode<T> * root = sentinel;
 };
 
-#include "BinarySearchTree.cpp"
+#include "BinarySearchTree.tpp"
 #endif

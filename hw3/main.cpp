@@ -13,13 +13,14 @@ int main() {
 	BinarySearchTree<int> tree;
 
 	// test insert & search
-	tree.insertNode(64);
-	if(tree.search(64) == NULL) {
+	BNode<int> * root = tree.getRoot();
+	tree.insertNode(root, 64);
+	if(tree.search(root, 64) == NULL) {
 		printf("insert failed");
 	}
 
 	// test search
-	if(tree.search(102) != tree.getSentinel()) {
+	if(tree.search(root, 102) != tree.getSentinel()) {
 		printf("search failed");
 	}
 }

@@ -29,10 +29,10 @@ void BinarySearchTree<T>::insertNode(BNode<T>* subRoot, T val) {
 		subRoot = &z;
 	}
 	else if (z.getKey() < y->getKey()) {
-		y->setLeft(z);
+		y->setLeft(&z);
 	}
 	else {
-		y->setRight(z);
+		y->setRight(&z);
 	}
 }
 
