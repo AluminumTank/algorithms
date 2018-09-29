@@ -3,9 +3,14 @@
  *
  * AUTHOR: Daniel Parker
  * DATE: Sept 22, 2018
- * 
+ *
 **/
+#ifndef _BINARYSEARCHTREE_H_
+#define _BINARYSEARCHTREE_H_
 #include "BNode.h"
+#include <cstddef>
+
+using namespace std;
 
 template <class T>
 class BinarySearchTree {
@@ -27,3 +32,6 @@ private:
 	BNode<T> * sentinel = new BNode<T>(NULL);
 	BNode<T> * root = sentinel;
 };
+
+#include "BinarySearchTree.cpp"
+#endif

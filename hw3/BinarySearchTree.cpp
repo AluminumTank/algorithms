@@ -1,5 +1,7 @@
+#include <cstddef>
 #include "BinarySearchTree.h"
 
+using namespace std;
 
 template <class T>
 BinarySearchTree<T>::~BinarySearchTree() {
@@ -24,7 +26,7 @@ void BinarySearchTree<T>::insertNode(BNode<T>* subRoot, T val) {
 
 	z.setParent(y);
 	if (y == sentinel) {
-		subroot = &z;
+		subRoot = &z;
 	}
 	else if (z.getKey() < y->getKey()) {
 		y->setLeft(z);
@@ -43,7 +45,7 @@ void BinarySearchTree<T>::removeNode(BNode<T>* subRoot, BNode<T>* val) {
 		transplant(val, val->getLeft());
 	}
 	else {
-		BNode<T> * y = getMinimum(subroot->getRight());
+		BNode<T> * y = getMinimum(subRoot->getRight());
 		if (y->getParent() != val) {
 			transplant(y, y->getRight());
 			y->setRight(val->getRight());
@@ -77,14 +79,14 @@ BNode<T>* BinarySearchTree<T>::getMaximum(BNode<T> * subRoot) {
 template<class T>
 BNode<T>* BinarySearchTree<T>::search(BNode<T> * subRoot, T key) {
 	BNode<T> * x = subRoot;
-	if (x == sentinel || k == x->getKey()) {
+	if (x == sentinel || key == x->getKey()) {
 		return x;
 	}
 
-	if (k < x->getKey()) {
-		return search(x->getLeft(), k);
+	if (key < x->getKey()) {
+		return search(x->getLeft(), key);
 	} else {
-		return search(x->getRight(), k);
+		return search(x->getRight(), key);
 	}
 }
 
@@ -107,7 +109,7 @@ template<class T>
 BNode<T>* BinarySearchTree<T>::getPredecessor(BNode<T>* subRoot) {
 	BNode<T> * x = subRoot;
 	if (x->getRight() != sentinel) {
-		return xgetMaximum();
+		return x->getMaximum();
 	}
 
 	BNode<T> * y = x->getParent();
@@ -131,7 +133,7 @@ BNode<T>* BinarySearchTree<T>::getSentinel() {
 }
 
 template<class T>
-void transplant(BNode<T> * candidate, BNode<T> * donor) {
+void BinarySearchTree<T>::transplant(BNode<T> * candidate, BNode<T> * donor) {
 	BNode<T> * parent = candidate.getParent();
 
 	// connect candidate parent and donor: determine whether candidate is left or right child

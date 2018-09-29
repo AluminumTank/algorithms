@@ -1,6 +1,11 @@
 //	Authors: Joel Beckmeyer, Daniel Parker
 //	Date: 2018-09-22
 //	Purpose: To specify a node that can store any type
+#ifndef _BNODE_H_
+#define _BNODE_H_
+#include <cstddef>
+
+using namespace std;
 
 template <class T>
 class BNode {
@@ -24,3 +29,6 @@ class BNode {
 		BNode<T> * left = NULL;
 		T key = NULL;
 };
+
+#include "BNode.cpp"
+#endif
