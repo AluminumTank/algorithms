@@ -130,7 +130,7 @@ BNode<T>* BinarySearchTree<T>::getSuccessor(BNode<T>* subRoot) {
 		return x->getMinimum();
 	}
 
-	BNode<T> * y = x.getParent();
+	BNode<T> * y = x->getParent();
 	while (y != sentinel && x != y->getLeft()) {
 		x = y;
 		y = y->getParent();
@@ -167,7 +167,7 @@ BNode<T>* BinarySearchTree<T>::getSentinel() {
 
 template<class T>
 void BinarySearchTree<T>::transplant(BNode<T> * candidate, BNode<T> * donor) {
-	BNode<T> * parent = candidate.getParent();
+	BNode<T> * parent = candidate->getParent();
 
 	// connect candidate parent and donor: determine whether candidate is left or right child
 	if (candidate == parent->getRight()) {
