@@ -6,10 +6,8 @@
 #include <cstddef>
 #include "BNode.h"
 
-#define RED 0
-#define RED_BLACK 1
-#define BLACK 2
-#define BLACK_BLACK 3
+#define RED false
+#define BLACK true
 
 using namespace std;
 
@@ -24,7 +22,7 @@ public:
 	void setColor(int newColor);
 
 private:
-	int color = RED;
+	bool color = RED;
 };
 
 template <class T>
