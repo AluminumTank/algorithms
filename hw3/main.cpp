@@ -9,12 +9,15 @@
 #include <stdio.h>
 #include <cstddef>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 bool propertyOne(RBNode<int> * subTree);
 bool propertyFour(RBNode<int> * subTree);
 int propertyFive(RBNode<int> * subTree);
+string isRedBlack(RedBlackTree<int> tree);
+
 
 int main() {
 	BinarySearchTree<int> tree;
@@ -47,7 +50,7 @@ int main() {
 		if (tmp > 0) {
 			rbTree.insertNode(rbTree.getRoot(), tmp);
 		} else if (tmp < 0) {
-			rbTree.removeNode(rbTree.search(rbTree.getRoot(), -tmp));
+			rbTree.removeNode(rbTree.getRoot(), rbTree.search(rbTree.getRoot(), -tmp));
 		}
 	}
 
@@ -77,7 +80,7 @@ string isRedBlack(RedBlackTree<int> tree) {
 	}
 
 	// property 5
-	if (propertyFive(tree.getRoot() == -1)) {
+	if (propertyFive(tree.getRoot()) == -1) {
 		return "Property 5: black height of all paths is not equal";
 	}
 	return "";

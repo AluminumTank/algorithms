@@ -19,8 +19,8 @@ public:
 	~RedBlackTree();
 	void insertNode(RBNode<T> * subRoot, T val);
 	void removeNode(RBNode<T> * subRoot, RBNode<T> * val);
-	RBNode<T> getRoot() override;
-	RBNode<T> search(BNode<T> * subRoot, T Key) override;
+	RBNode<T> * getRoot() override;
+	RBNode<T> * search(BNode<T> * subRoot, T Key) override;
 
 private:
 	void insertFixup(RBNode<T> * subRoot, RBNode<T> * z);
@@ -124,12 +124,12 @@ void RedBlackTree<T>::removeNode(RBNode<T> * subRoot, RBNode<T> * z) {
 }
 
 template<class T>
-inline RBNode<T> RedBlackTree<T>::getRoot() {
+RBNode<T> * RedBlackTree<T>::getRoot() {
 	return static_cast<RBNode<T> *>(root);
 }
 
 template<class T>
-inline RBNode<T> RedBlackTree<T>::search(BNode<T>* subRoot, T Key)
+RBNode<T> * RedBlackTree<T>::search(BNode<T>* subRoot, T Key)
 {
 	return static_cast<RBNode<T> *>(BinarySearchTree::search(subRoot, Key));
 }

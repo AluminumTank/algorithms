@@ -31,11 +31,13 @@ RBNode<T>::RBNode(T newKey, int newColor) : BNode(newKey) {
 }
 
 template <class T>
-void RBNode<T>::getColor() {
+int RBNode<T>::getColor() {
 	return color;
 }
 
 template <class T>
-void setColor(int newColor) {
+void RBNode<T>::setColor(int newColor) {
 	color = newColor;
 }
+
+#endif
