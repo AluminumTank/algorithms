@@ -36,7 +36,6 @@ private:
 
 template<class T>
 RedBlackTree<T>::RedBlackTree() {
-	delete this->sentinel;
 	this->sentinel = new RBNode<T>(NULL, BLACK);
 	this->sentinel->setLeft(this->sentinel);
 	this->sentinel->setParent(this->sentinel);
@@ -46,7 +45,7 @@ RedBlackTree<T>::RedBlackTree() {
 
 template<class T>
 RedBlackTree<T>::~RedBlackTree() {
-	delete this->root;
+	
 }
 
 

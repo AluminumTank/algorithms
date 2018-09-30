@@ -16,7 +16,7 @@ using namespace std;
 bool propertyOne(RBNode<int> * subTree);
 bool propertyFour(RBNode<int> * subTree);
 int propertyFive(RBNode<int> * subTree);
-string isRedBlack(RedBlackTree<int> tree);
+string isRedBlack(RedBlackTree<int> * tree);
 
 
 int main() {
@@ -42,7 +42,7 @@ int main() {
 
 	RedBlackTree<int> rbTree;
 	int tmp = 1;
-	while (isRedBlack(rbTree).length() == 0, tmp != 0) {
+	while (isRedBlack(&rbTree).size() == 0, tmp != 0) {
 		cout << "Enter an integer: ";
 		cin >> tmp;
 		// if number is greater than 0, we insert it; if it is less than zero, we
@@ -54,36 +54,36 @@ int main() {
 		}
 	}
 
-	cout << isRedBlack(rbTree);
+	cout << isRedBlack(&rbTree);
 
 	return 0;
 }
 
-string isRedBlack(RedBlackTree<int> tree) {
+string isRedBlack(RedBlackTree<int> *tree) {
 	// property 1
-	if (!propertyOne(tree.getRoot())) {
+	if (!propertyOne(tree->getRoot())) {
 		return "Property 1: not every node is red or black";
 	}
 	// property 2
-	if (tree.getRoot()->getColor() != BLACK) {
+	if (tree->getRoot()->getColor() != BLACK) {
 		return "Property 2: root node is not black";
 	}
 
 	// property 3
-	if (tree.getRoot()->getParent()->getColor() != BLACK) {
+	if (tree->getRoot()->getParent()->getColor() != BLACK) {
 		return "Property 3: every leaf is not black";
 	}
 
 	// property 4
-	if (!propertyFour(tree.getRoot())) {
+	if (!propertyFour(tree->getRoot())) {
 		return "Property 4: not every red node has both black children";
 	}
 
 	// property 5
-	if (propertyFive(tree.getRoot()) == -1) {
+	if (propertyFive(tree->getRoot()) == -1) {
 		return "Property 5: black height of all paths is not equal";
 	}
-	return "";
+	return string();
 }
 
 bool propertyOne(RBNode<int> * subTree) {
