@@ -146,7 +146,7 @@ RBNode<T> * RedBlackTree<T>::search(BNode<T>* subRoot, T Key)
 {
 	return static_cast<RBNode<T> *>(BinarySearchTree<T>::search(subRoot, Key));
 }
-
+ 
 template<class T>
 RBNode<T> * RedBlackTree<T>::getMinimum(BNode<T>* subRoot)
 {
