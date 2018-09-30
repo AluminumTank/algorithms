@@ -15,7 +15,7 @@ using namespace std;
 template <class T>
 class BinarySearchTree {
 public:
-	BinarySearchTree() {}
+	BinarySearchTree();
 	~BinarySearchTree();
 	void insertNode(BNode<T> * subRoot, T val);
 	BNode<T> * removeNode(BNode<T> * subRoot, BNode<T> * val);
@@ -35,6 +35,13 @@ protected:
 };
 
 
+
+template<class T>
+BinarySearchTree<T>::BinarySearchTree() {
+	sentinel->setLeft(sentinel);
+	sentinel->setParent(sentinel);
+	sentinel->setRight(sentinel);
+}
 
 template <class T>
 BinarySearchTree<T>::~BinarySearchTree() {
@@ -83,7 +90,7 @@ BNode<T> * BinarySearchTree<T>::removeNode(BNode<T> * subRoot, BNode<T> * val) {
 		return x;
 	}
 	else {
-		return NULL;
+		return sentinel;
 	}
 }
 

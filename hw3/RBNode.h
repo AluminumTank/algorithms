@@ -30,25 +30,22 @@ private:
 };
 
 template <class T>
-RBNode<T>::RBNode(T newKey, int newColor) : BNode(newKey) {
-	color = newColor;
+RBNode<T>::RBNode(T newKey, int newColor) : BNode<T>(newKey) {
+	this->color = newColor;
 }
 
 template<class T>
-RBNode<T>* RBNode<T>::getParent()
-{
+RBNode<T>* RBNode<T>::getParent() {
 	return static_cast<RBNode<T> *>(BNode<T>::getParent());
 }
 
 template<class T>
-RBNode<T>* RBNode<T>::getRight()
-{
+RBNode<T>* RBNode<T>::getRight() {
 	return static_cast<RBNode<T> *>(BNode<T>::getRight());
 }
 
 template<class T>
-RBNode<T>* RBNode<T>::getLeft()
-{
+RBNode<T>* RBNode<T>::getLeft() {
 	return static_cast<RBNode<T> *>(BNode<T>::getLeft());
 }
 

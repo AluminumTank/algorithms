@@ -42,7 +42,7 @@ int main() {
 
 	RedBlackTree<int> rbTree;
 	int tmp = 1;
-	while (isRedBlack(rbTree) == "", tmp != 0) {
+	while (isRedBlack(rbTree).length() == 0, tmp != 0) {
 		cout << "Enter an integer: ";
 		cin >> tmp;
 		// if number is greater than 0, we insert it; if it is less than zero, we
