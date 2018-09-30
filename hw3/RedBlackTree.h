@@ -19,7 +19,14 @@ public:
 	~RedBlackTree();
 	void insertNode(RBNode<T> * subRoot, T val);
 	void removeNode(RBNode<T> * subRoot, RBNode<T> * val);
+
+	RBNode<T> * getMinimum(BNode<T>* subRoot) override;
+	RBNode<T> * getMaximum(BNode<T>* subRoot) override;
+	RBNode<T> * getPredecessor(BNode<T>* subRoot) override;
+	RBNode<T> * getSuccessor(BNode<T>* subRoot) override;
 	RBNode<T> * getRoot() override;
+	RBNode<T> * getSentinel() override;
+
 	RBNode<T> * search(BNode<T> * subRoot, T Key) override;
 
 private:
@@ -33,7 +40,7 @@ private:
 
 
 template<class T>
-inline RedBlackTree<T>::~RedBlackTree() {
+RedBlackTree<T>::~RedBlackTree() {
 	delete sentinel;
 	delete root;
 }
@@ -134,7 +141,35 @@ RBNode<T> * RedBlackTree<T>::search(BNode<T>* subRoot, T Key)
 	return static_cast<RBNode<T> *>(BinarySearchTree::search(subRoot, Key));
 }
 
+template<class T>
+RBNode<T> * RedBlackTree<T>::getMinimum(BNode<T>* subRoot)
+{
+	return static_cast<RBNode<T> *>(BinarySearchTree::getMinimum(subRoot));
+}
 
+template<class T>
+RBNode<T> * RedBlackTree<T>::getMaximum(BNode<T>* subRoot)
+{
+	return static_cast<RBNode<T> *>(BinarySearchTree::getMaximum(subRoot));
+}
+
+template<class T>
+RBNode<T> * RedBlackTree<T>::getPredecessor(BNode<T>* subRoot)
+{
+	return static_cast<RBNode<T> *>(BinarySearchTree::getPredecessor(subRoot));
+}
+
+template<class T>
+RBNode<T> * RedBlackTree<T>::getSuccessor(BNode<T>* subRoot)
+{
+	return static_cast<RBNode<T> *>(BinarySearchTree::getSuccessor(subRoot));
+}
+
+template<class T>
+RBNode<T> * RedBlackTree<T>::getSentinel()
+{
+	return static_cast<RBNode<T> *>(BinarySearchTree::getSentinel());
+}
 
 template<class T>
 void RedBlackTree<T>::removeFixUp(RBNode<T> * subRoot, RBNode<T> * x) {
