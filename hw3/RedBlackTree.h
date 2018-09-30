@@ -20,14 +20,14 @@ public:
 	void insertNode(RBNode<T> * subRoot, T val);
 	void removeNode(RBNode<T> * subRoot, RBNode<T> * val);
 
-	RBNode<T> * getMinimum(BNode<T>* subRoot) override;
-	RBNode<T> * getMaximum(BNode<T>* subRoot) override;
-	RBNode<T> * getPredecessor(BNode<T>* subRoot) override;
-	RBNode<T> * getSuccessor(BNode<T>* subRoot) override;
-	RBNode<T> * getRoot() override;
-	RBNode<T> * getSentinel() override;
+	RBNode<T> * getMinimum(BNode<T>* subRoot);
+	RBNode<T> * getMaximum(BNode<T>* subRoot);
+	RBNode<T> * getPredecessor(BNode<T>* subRoot);
+	RBNode<T> * getSuccessor(BNode<T>* subRoot);
+	RBNode<T> * getRoot();
+	RBNode<T> * getSentinel();
 
-	RBNode<T> * search(BNode<T> * subRoot, T Key) override;
+	RBNode<T> * search(BNode<T> * subRoot, T Key);
 
 private:
 	void insertFixup(RBNode<T> * subRoot, RBNode<T> * z);
@@ -50,8 +50,8 @@ RedBlackTree<T>::~RedBlackTree() {
 template<class T>
 void RedBlackTree<T>::insertNode(RBNode<T>* subRoot, T val) {
 	RBNode<T> z(val, RED);
-	BinarySearchTree<T>::insertNode(subroot, &z);
-	insertFixup(subRoot, z&);
+	BinarySearchTree<T>::insertNode(subRoot, &z);
+	insertFixup(subRoot, &z);
 }
 
 

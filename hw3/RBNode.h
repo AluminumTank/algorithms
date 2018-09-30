@@ -17,9 +17,9 @@ public:
 	RBNode() {}
 	RBNode(T newKey, int newColor);
 
-	RBNode<T> * getParent() override;
-	RBNode<T> * getRight() override;
-	RBNode<T> * getLeft() override;
+	RBNode<T> * getParent();
+	RBNode<T> * getRight();
+	RBNode<T> * getLeft();
 
 	int getColor();
 
