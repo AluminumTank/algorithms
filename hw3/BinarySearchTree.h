@@ -30,7 +30,6 @@ public:
 
 protected:
 	void insertNode(BNode<T> * subRoot, BNode<T> * z);
-private:
 	BNode<T> * sentinel = new BNode<T>(NULL);
 	BNode<T> * root = sentinel;
 };
@@ -52,35 +51,40 @@ void BinarySearchTree<T>::insertNode(BNode<T>* subRoot, T val) {
 // returns the child of Y
 template<class T>
 BNode<T> * BinarySearchTree<T>::removeNode(BNode<T> * subRoot, BNode<T> * val) {
-	BNode<T> * x;
-	// case 1
-	if (val->getLeft() == sentinel) {
-		x = val->getRight();
-		transplant(val, x);
-	}
-	// case 2
-	else if (val->getRight() == sentinel) {
-		x = val->getLeft();
-		transplant(val, x);
-	}
-	else {
-		BNode<T> * y = getMinimum(subRoot->getRight());
-		x = y->getRight();
+	if (val != sentinel) {
+		BNode<T> * x;
+		// case 1
+		if (val->getLeft() == sentinel) {
+			x = val->getRight();
+			transplant(val, x);
+		}
+		// case 2
+		else if (val->getRight() == sentinel) {
+			x = val->getLeft();
+			transplant(val, x);
+		}
+		else {
+			BNode<T> * y = getMinimum(subRoot->getRight());
+			x = y->getRight();
 
-		// case 4
-		if (y->getParent() != val) {
-			transplant(y, y->getRight());
-			y->setRight(val->getRight());
-			y->getRight()->setParent(y);
+			// case 4
+			if (y->getParent() != val) {
+				transplant(y, y->getRight());
+				y->setRight(val->getRight());
+				y->getRight()->setParent(y);
+			}
+
+			// case 3
+			transplant(val, y);
+			y->setLeft(val->getLeft());
+			y->getLeft()->setParent(y);
 		}
 
-		// case 3
-		transplant(val, y);
-		y->setLeft(val->getLeft());
-		y->getLeft()->setParent(y);
+		return x;
 	}
-
-	return x;
+	else {
+		return NULL;
+	}
 }
 
 template<class T>

@@ -11,10 +11,16 @@
 template <class T>
 class RedBlackTree : public BinarySearchTree<T>{
 public:
-	RedBlackTree() {}
+	RedBlackTree() {
+		delete sentinel;
+		sentinel = new RBNode<T>(NULL, BLACK);
+		root = sentinel;
+	}
 	~RedBlackTree();
 	void insertNode(RBNode<T> * subRoot, T val);
 	void removeNode(RBNode<T> * subRoot, RBNode<T> * val);
+	RBNode<T> getRoot() override;
+	RBNode<T> search(BNode<T> * subRoot, T Key) override;
 
 private:
 	void insertFixup(RBNode<T> * subRoot, RBNode<T> * z);
@@ -89,28 +95,43 @@ void RedBlackTree<T>::insertFixup(RBNode<T>* subRoot, RBNode<T>* z) {
 
 template<class T>
 void RedBlackTree<T>::removeNode(RBNode<T> * subRoot, RBNode<T> * z) {
-	RBNode<T> * y;
-	// we find the position of z
-	RBNode<T> * parent = z->getParent();
-	bool isRoot = parent == sentinel;
-	bool isLeft = (parent->getLeft() == z);
+	if (z != sentinel) {
+		RBNode<T> * y;
+		// we find the position of z
+		RBNode<T> * parent = z->getParent();
+		bool isRoot = parent == sentinel;
+		bool isLeft = (parent->getLeft() == z);
 
-	RBNode<T> * x = removeNode(subRoot, z);
-	// z's position is now y's position, so we find y
-	if (isRoot) {
-		y = getRoot();
-	} else if (isLeft) {
-		y = parent->getLeft();
-	} else {
-		y = parent->getRight();
-	}
+		RBNode<T> * x = removeNode(subRoot, z);
+		// z's position is now y's position, so we find y
+		if (isRoot) {
+			y = getRoot();
+		}
+		else if (isLeft) {
+			y = parent->getLeft();
+		}
+		else {
+			y = parent->getRight();
+		}
 
-	if (y->getColor == BLACK) {
-		removeFixUp(subRoot, x);
+		if (y->getColor == BLACK) {
+			removeFixUp(subRoot, x);
+		}
+		if (x != y) {
+			y->setColor(z->getColor());
+		}
 	}
-	if (x != y) {
-		y->setColor(z->getColor());
-	}
+}
+
+template<class T>
+inline RBNode<T> RedBlackTree<T>::getRoot() {
+	return static_cast<RBNode<T> *>(root);
+}
+
+template<class T>
+inline RBNode<T> RedBlackTree<T>::search(BNode<T>* subRoot, T Key)
+{
+	return static_cast<RBNode<T> *>(BinarySearchTree::search(subRoot, Key));
 }
 
 
