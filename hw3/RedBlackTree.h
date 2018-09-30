@@ -1,10 +1,9 @@
-/**
- * SUMMARY: An implementation of a binary search tree.
+/* SUMMARY: An implementation of a binary search tree.
  *
- * AUTHOR: Daniel Parker
+ * AUTHOR: Daniel Parker, Joel Beckmeyer
  * DATE: Sept 22, 2018
  *
-**/
+ */
 #include "RBNode.h"
 #include "BinarySearchTree.h"
 
@@ -37,7 +36,7 @@ private:
 
 template<class T>
 RedBlackTree<T>::RedBlackTree() {
-	delete (this->sentinel);
+	delete this->sentinel;
 	this->sentinel = new RBNode<T>(NULL, BLACK);
 	this->sentinel->setLeft(this->sentinel);
 	this->sentinel->setParent(this->sentinel);
@@ -47,7 +46,6 @@ RedBlackTree<T>::RedBlackTree() {
 
 template<class T>
 RedBlackTree<T>::~RedBlackTree() {
-	delete this->sentinel;
 	delete this->root;
 }
 
