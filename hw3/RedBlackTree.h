@@ -150,31 +150,31 @@ RBNode<T> * RedBlackTree<T>::search(BNode<T>* subRoot, T Key)
 template<class T>
 RBNode<T> * RedBlackTree<T>::getMinimum(BNode<T>* subRoot)
 {
-	return static_cast<RBNode<T> *>(BinarySearchTree::getMinimum(subRoot));
+	return static_cast<RBNode<T> *>(BinarySearchTree<T>::getMinimum(subRoot));
 }
 
 template<class T>
 RBNode<T> * RedBlackTree<T>::getMaximum(BNode<T>* subRoot)
 {
-	return static_cast<RBNode<T> *>(BinarySearchTree::getMaximum(subRoot));
+	return static_cast<RBNode<T> *>(BinarySearchTree<T>::getMaximum(subRoot));
 }
 
 template<class T>
 RBNode<T> * RedBlackTree<T>::getPredecessor(BNode<T>* subRoot)
 {
-	return static_cast<RBNode<T> *>(BinarySearchTree::getPredecessor(subRoot));
+	return static_cast<RBNode<T> *>(BinarySearchTree<T>::getPredecessor(subRoot));
 }
 
 template<class T>
 RBNode<T> * RedBlackTree<T>::getSuccessor(BNode<T>* subRoot)
 {
-	return static_cast<RBNode<T> *>(BinarySearchTree::getSuccessor(subRoot));
+	return static_cast<RBNode<T> *>(BinarySearchTree<T>::getSuccessor(subRoot));
 }
 
 template<class T>
 RBNode<T> * RedBlackTree<T>::getSentinel()
 {
-	return static_cast<RBNode<T> *>(BinarySearchTree::getSentinel());
+	return static_cast<RBNode<T> *>(BinarySearchTree<T>::getSentinel());
 }
 
 template<class T>
