@@ -34,6 +34,9 @@ RBNode<T>::RBNode(T newKey, int newColor) : BNode<T>(newKey) {
 	this->color = newColor;
 }
 
+// for the following functions, we found it useful to interact with the tree
+// without having to cast every time. Our solution was to redefine each of the
+// functions as a cast of the underlying BNode pointer
 template<class T>
 RBNode<T>* RBNode<T>::getParent() {
 	return static_cast<RBNode<T> *>(BNode<T>::getParent());
