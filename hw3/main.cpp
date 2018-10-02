@@ -10,6 +10,7 @@
 #include <cstddef>
 #include <iostream>
 #include <string>
+#include <limits>
 
 using namespace std;
 
@@ -20,69 +21,62 @@ string isRedBlack(RedBlackTree<int> * tree);
 
 
 int main() {
-	BinarySearchTree<int> tree;
-
-	// test insert & search
-	tree.insertNode(tree.getRoot(), 64);
-	if(tree.search(tree.getRoot(), 64) == NULL) {
-		printf("insert failed\n");
-	}
-	else {
-		printf("Insert succeded\n");
-	}
-
-	// test search
-	if(tree.search(tree.getRoot(), 102) != tree.getSentinel()) {
-		printf("search failed\n");
-	}
-	else {
-		printf("search succeded\n");
-	}
-
-	//for (int i = 0; i < 100; ++i) {
-	//	
-	//	if (i % 2 == 0) {
-	//		tree.insertNode(tree.getRoot(), i / 2);
-	//	}
-	//	else {
-	//		tree.insertNode(tree.getRoot(), -i / 2);
-	//	}
-	//	//tree.insertNode(tree.getRoot(), 20 - i);
-	//}
-	//
-
-	//tree.print(tree.getRoot(), 0);
-
-	RedBlackTree<int> rbTree;
-	rbTree.insertNode(rbTree.getRoot(), 20);
-	rbTree.insertNode(rbTree.getRoot(), 10);
-	rbTree.insertNode(rbTree.getRoot(), 30);
-	rbTree.insertNode(rbTree.getRoot(), 1);
-	rbTree.insertNode(rbTree.getRoot(), 15);
-	rbTree.insertNode(rbTree.getRoot(), 25);
-	rbTree.insertNode(rbTree.getRoot(), 40);
-	rbTree.insertNode(rbTree.getRoot(), 16);
-	rbTree.insertNode(rbTree.getRoot(), 26);
-	rbTree.print(rbTree.getRoot(), 0);
-	int tmp = 1;
-	while (isRedBlack(&rbTree).size() == 0 && tmp != 0) {
-		cout << "Enter an integer: ";
-		cin >> tmp;
-		// if number is greater than 0, we insert it; if it is less than zero, we
-		// remove the corresponding node that has value of |tmp|
-		if (tmp > 0) {
-			rbTree.insertNode(rbTree.getRoot(), tmp);
-		} else if (tmp < 0) {
-			rbTree.removeNode(rbTree.getRoot(), rbTree.search(rbTree.getRoot(), -tmp));
+	int response = 0;
+	while (response != 2) {
+		cout << "Which type of tree would you like to test? BSTree(0), RBTree(1), or Exit(2)\n";
+		cin >> response;
+		if (response == 0) {
+			BinarySearchTree<int> bsTree;
+			cout << "Usage: \n";
+			cout << " - Insert: Use a positive integer\n";
+			cout << " - Remove: Use a negative integer\n";
+			cout << " - Exit: Use zero\n";
+			response = 1;
+			while (response != 0) {
+				cout << "Input: ";
+				cin >> response;
+				if (response > 0) {
+					bsTree.insertNode(bsTree.getRoot(), response);
+				}
+				else if (response < 0) {
+					bsTree.removeNode(bsTree.getRoot(), bsTree.search(bsTree.getRoot(), -response));
+				}
+				bsTree.print(bsTree.getRoot(), 0);
+			}
 		}
-		cout << endl;
-		rbTree.print(rbTree.getRoot(), 0);
+		else if (response == 1) {
+			RedBlackTree<int> rbTree;
+			cout << "Usage: \n";
+			cout << " - Insert: Use a positive integer\n";
+			cout << " - Remove: Use a negative integer\n";
+			cout << " - Exit: Use zero\n";
+			response = 1;
+			while (response != 0 && isRedBlack(&rbTree).size() == 0) {
+				cout << "Input: ";
+				cin >> response;
+				if (response > 0) {
+					rbTree.insertNode(rbTree.getRoot(), response);
+				}
+				else if (response < 0) {
+					rbTree.removeNode(rbTree.getRoot(), rbTree.search(rbTree.getRoot(), -response));
+				}
+				rbTree.print(rbTree.getRoot(), 0);
+			}
+			cout << isRedBlack(&rbTree) << endl;
+		}
+		else if (response == 2) {
+			cout << "Thanks for testing the code.\n";
+		}
+		else {
+			cout << "That was not a valid input.\n";
+		}
+		cout << "Press ENTER to continue...";
+		string enter;
+		getline(cin, enter, '\n');
+		cout << flush;
 	}
 
-cout << isRedBlack(&rbTree);
-	string a;
-	getline(cin, a);
-	cout << a;
+
 	return 0;
 }
 
