@@ -1,0 +1,85 @@
+Which type of tree would you like to test? BSTree(0), RBTree(1), Input/Output Tests(2), or Exit(3)
+2
+Would you like to see the BinarySearchTree Test(0), the RedBlackTree Test(1), or Exit(2)?
+0
+   |100
+   |   |   |99
+   |   |75
+50
+   |   |   |   |   |   |25
+   |   |   |   |   |1
+   |   |   |   |1
+   |   |   |1
+   |   |1
+   |1
+
+Inserting 80, 40, and 20:
+   |100
+   |   |   |99
+   |   |   |   |80
+   |   |75
+50
+   |   |   |   |   |   |   |40
+   |   |   |   |   |   |25
+   |   |   |   |   |   |   |20
+   |   |   |   |   |1
+   |   |   |   |1
+   |   |   |1
+   |   |1
+   |1
+
+Removing 1, 1, 75, and 98:
+   |100
+   |   |99
+   |   |   |80
+50
+   |   |   |   |   |40
+   |   |   |   |25
+   |   |   |   |   |20
+   |   |   |1
+   |   |1
+   |1
+Would you like to see the BinarySearchTree Test(0), the RedBlackTree Test(1), or Exit(2)?
+1
+   |   |   |100R
+   |   |99B
+   |   |   |75R
+   |50R
+   |   |   |25R
+   |   |1B
+1B
+   |   |1B
+   |1R
+   |   |1B
+
+Inserting 80, 40, and 20:
+   |   |   |100B
+   |   |99R
+   |   |   |   |80R
+   |   |   |75B
+   |50B
+   |   |   |40B
+   |   |25R
+   |   |   |   |20R
+   |   |   |1B
+1B
+   |   |1B
+   |1B
+   |   |1B
+
+Removing 1, 1, 75, and 98:
+
+   |   |   |100B
+   |   |99R
+   |   |   |80B
+   |50B
+   |   |   |40R
+   |   |25B
+20B
+   |   |1B
+   |1B
+   |   |1B
+Would you like to see the BinarySearchTree Test(0), the RedBlackTree Test(1), or Exit(2)?
+2
+Which type of tree would you like to test? BSTree(0), RBTree(1), Input/Output Tests(2), or Exit(3)
+3

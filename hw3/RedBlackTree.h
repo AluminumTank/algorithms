@@ -206,7 +206,6 @@ template<class T>
 void RedBlackTree<T>::removeFixup(RBNode<T> * subRoot, RBNode<T> * x) {
 	while (x != this->root && x->getColor() == BLACK) {
 		cout << endl;
-		print(subRoot, 0);
 		// if x is a left child
 		if (x->getParent()->getLeft() == x) {
 			RBNode<T> * w = x->getParent()->getRight();

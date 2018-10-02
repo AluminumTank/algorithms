@@ -18,12 +18,16 @@ bool propertyOne(RBNode<int> * subTree);
 bool propertyFour(RBNode<int> * subTree);
 int propertyFive(RBNode<int> * subTree);
 string isRedBlack(RedBlackTree<int> * tree);
+void BSTTest(BinarySearchTree<int> * tree);
+void RBTTest(RedBlackTree<int> * tree);
+
+
 
 
 int main() {
 	int response = 0;
-	while (response != 2) {
-		cout << "Which type of tree would you like to test? BSTree(0), RBTree(1), or Exit(2)\n";
+	while (response != 3) {
+		cout << "Which type of tree would you like to test? BSTree(0), RBTree(1), Input/Output Tests(2), or Exit(3)\n";
 		cin >> response;
 		if (response == 0) {
 			BinarySearchTree<int> bsTree;
@@ -65,14 +69,26 @@ int main() {
 			cout << isRedBlack(&rbTree) << endl;
 		}
 		else if (response == 2) {
+			response = 0;
+			while (response != 2) {
+				cout << "Would you like to see the BinarySearchTree Test(0), the RedBlackTree Test(1), or Exit(2)?" << endl;
+				cin >> response;
+				if (response == 0) {
+					BinarySearchTree<int> bsTree;
+					BSTTest(&bsTree);
+				}
+				else if (response == 1) {
+					RedBlackTree<int> rbTree;
+					RBTTest(&rbTree);
+				}
+			}
+		} 
+		else if(response == 3) {
 			cout << "Thanks for testing the code.\n";
 		}
 		else {
 			cout << "That was not a valid input.\n";
 		}
-		cout << "Press ENTER to continue...";
-		string enter;
-		getline(cin, enter, '\n');
 		cout << flush;
 	}
 
@@ -146,56 +162,56 @@ int propertyFive(RBNode<int> * subTree) {
 	}
 }
 
-void BSTTest(BinarySearchTree<int> tree) {
-	tree.insertNode(tree.getRoot(), 50);
-	tree.insertNode(tree.getRoot(), 100);
-	tree.insertNode(tree.getRoot(), 1);
-	tree.insertNode(tree.getRoot(), 1);
-	tree.insertNode(tree.getRoot(), 1);
-	tree.insertNode(tree.getRoot(), 1);
-	tree.insertNode(tree.getRoot(), 1);
-	tree.insertNode(tree.getRoot(), 75);
-	tree.insertNode(tree.getRoot(), 25);
-	tree.insertNode(tree.getRoot(), 99);
-	tree.print(tree.getRoot(), 0);
+void BSTTest(BinarySearchTree<int> * tree) {
+	tree->insertNode(tree->getRoot(), 50);
+	tree->insertNode(tree->getRoot(), 100);
+	tree->insertNode(tree->getRoot(), 1);
+	tree->insertNode(tree->getRoot(), 1);
+	tree->insertNode(tree->getRoot(), 1);
+	tree->insertNode(tree->getRoot(), 1);
+	tree->insertNode(tree->getRoot(), 1);
+	tree->insertNode(tree->getRoot(), 75);
+	tree->insertNode(tree->getRoot(), 25);
+	tree->insertNode(tree->getRoot(), 99);
+	tree->print(tree->getRoot(), 0);
 	cout << "\nInserting 80, 40, and 20:";
-	tree.insertNode(tree.getRoot(), 80);
-	tree.insertNode(tree.getRoot(), 40);
-	tree.insertNode(tree.getRoot(), 20);
+	tree->insertNode(tree->getRoot(), 80);
+	tree->insertNode(tree->getRoot(), 40);
+	tree->insertNode(tree->getRoot(), 20);
 	cout << endl;
-	tree.print(tree.getRoot(), 0);
+	tree->print(tree->getRoot(), 0);
 	cout << "\nRemoving 1, 1, 75, and 98:";
-	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 1));
-	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 1));
-	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 75));
-	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 98));
+	tree->removeNode(tree->getRoot(), tree->search(tree->getRoot(), 1));
+	tree->removeNode(tree->getRoot(), tree->search(tree->getRoot(), 1));
+	tree->removeNode(tree->getRoot(), tree->search(tree->getRoot(), 75));
+	tree->removeNode(tree->getRoot(), tree->search(tree->getRoot(), 98));
 	cout << endl;
-	tree.print(tree.getRoot(), 0);
+	tree->print(tree->getRoot(), 0);
 }
 
-void RBTTest(RedBlackTree<int> tree) {
-	tree.insertNode(tree.getRoot(), 50);
-	tree.insertNode(tree.getRoot(), 100);
-	tree.insertNode(tree.getRoot(), 1);
-	tree.insertNode(tree.getRoot(), 1);
-	tree.insertNode(tree.getRoot(), 1);
-	tree.insertNode(tree.getRoot(), 1);
-	tree.insertNode(tree.getRoot(), 1);
-	tree.insertNode(tree.getRoot(), 75);
-	tree.insertNode(tree.getRoot(), 25);
-	tree.insertNode(tree.getRoot(), 99);
-	tree.print(tree.getRoot(), 0);
+void RBTTest(RedBlackTree<int> * tree) {
+	tree->insertNode(tree->getRoot(), 50);
+	tree->insertNode(tree->getRoot(), 100);
+	tree->insertNode(tree->getRoot(), 1);
+	tree->insertNode(tree->getRoot(), 1);
+	tree->insertNode(tree->getRoot(), 1);
+	tree->insertNode(tree->getRoot(), 1);
+	tree->insertNode(tree->getRoot(), 1);
+	tree->insertNode(tree->getRoot(), 75);
+	tree->insertNode(tree->getRoot(), 25);
+	tree->insertNode(tree->getRoot(), 99);
+	tree->print(tree->getRoot(), 0);
 	cout << "\nInserting 80, 40, and 20:";
-	tree.insertNode(tree.getRoot(), 80);
-	tree.insertNode(tree.getRoot(), 40);
-	tree.insertNode(tree.getRoot(), 20);
+	tree->insertNode(tree->getRoot(), 80);
+	tree->insertNode(tree->getRoot(), 40);
+	tree->insertNode(tree->getRoot(), 20);
 	cout << endl;
-	tree.print(tree.getRoot(), 0);
+	tree->print(tree->getRoot(), 0);
 	cout << "\nRemoving 1, 1, 75, and 98:";
-	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 1));
-	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 1));
-	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 75));
-	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 98));
+	tree->removeNode(tree->getRoot(), tree->search(tree->getRoot(), 1));
+	tree->removeNode(tree->getRoot(), tree->search(tree->getRoot(), 1));
+	tree->removeNode(tree->getRoot(), tree->search(tree->getRoot(), 75));
+	tree->removeNode(tree->getRoot(), tree->search(tree->getRoot(), 98));
 	cout << endl;
-	tree.print(tree.getRoot(), 0);
+	tree->print(tree->getRoot(), 0);
 }
