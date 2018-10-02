@@ -145,3 +145,57 @@ int propertyFive(RBNode<int> * subTree) {
 		return leftHeight;
 	}
 }
+
+void BSTTest(BinarySearchTree<int> tree) {
+	tree.insertNode(tree.getRoot(), 50);
+	tree.insertNode(tree.getRoot(), 100);
+	tree.insertNode(tree.getRoot(), 1);
+	tree.insertNode(tree.getRoot(), 1);
+	tree.insertNode(tree.getRoot(), 1);
+	tree.insertNode(tree.getRoot(), 1);
+	tree.insertNode(tree.getRoot(), 1);
+	tree.insertNode(tree.getRoot(), 75);
+	tree.insertNode(tree.getRoot(), 25);
+	tree.insertNode(tree.getRoot(), 99);
+	tree.print(tree.getRoot(), 0);
+	cout << "\nInserting 80, 40, and 20:";
+	tree.insertNode(tree.getRoot(), 80);
+	tree.insertNode(tree.getRoot(), 40);
+	tree.insertNode(tree.getRoot(), 20);
+	cout << endl;
+	tree.print(tree.getRoot(), 0);
+	cout << "\nRemoving 1, 1, 75, and 98:";
+	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 1));
+	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 1));
+	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 75));
+	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 98));
+	cout << endl;
+	tree.print(tree.getRoot(), 0);
+}
+
+void RBTTest(RedBlackTree<int> tree) {
+	tree.insertNode(tree.getRoot(), 50);
+	tree.insertNode(tree.getRoot(), 100);
+	tree.insertNode(tree.getRoot(), 1);
+	tree.insertNode(tree.getRoot(), 1);
+	tree.insertNode(tree.getRoot(), 1);
+	tree.insertNode(tree.getRoot(), 1);
+	tree.insertNode(tree.getRoot(), 1);
+	tree.insertNode(tree.getRoot(), 75);
+	tree.insertNode(tree.getRoot(), 25);
+	tree.insertNode(tree.getRoot(), 99);
+	tree.print(tree.getRoot(), 0);
+	cout << "\nInserting 80, 40, and 20:";
+	tree.insertNode(tree.getRoot(), 80);
+	tree.insertNode(tree.getRoot(), 40);
+	tree.insertNode(tree.getRoot(), 20);
+	cout << endl;
+	tree.print(tree.getRoot(), 0);
+	cout << "\nRemoving 1, 1, 75, and 98:";
+	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 1));
+	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 1));
+	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 75));
+	tree.removeNode(tree.getRoot(), tree.search(tree.getRoot(), 98));
+	cout << endl;
+	tree.print(tree.getRoot(), 0);
+}
