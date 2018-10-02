@@ -6,6 +6,7 @@
  */
 #include "RBNode.h"
 #include "BinarySearchTree.h"
+#include <iostream>
 
 template <class T>
 class RedBlackTree : public BinarySearchTree<T>{
@@ -23,13 +24,15 @@ public:
 	RBNode<T> * getSentinel();
 
 	RBNode<T> * search(BNode<T> * subRoot, T Key);
+	void print(RBNode<T> * subroot, int space);
+
 
 private:
 	void insertFixup(RBNode<T> * subRoot, RBNode<T> * z);
 	void leftRotate(RBNode<T> * x);
 	void rightRotate(RBNode<T> * y);
 
-	void removeFixUp(RBNode<T> * subRoot, RBNode<T> * x);
+	void removeFixup(RBNode<T> * subRoot, RBNode<T> * x);
 };
 
 
@@ -52,15 +55,19 @@ RedBlackTree<T>::~RedBlackTree() {
 
 template<class T>
 void RedBlackTree<T>::insertNode(RBNode<T>* subRoot, T val) {
-	RBNode<T> z(val, RED);
-	BinarySearchTree<T>::insertNode(subRoot, &z);
-	insertFixup(subRoot, &z);
+	RBNode<T> * z = new RBNode<T>(val, RED);
+	z->setRight(this->sentinel);
+	z->setLeft(this->sentinel);
+	z->setParent(this->sentinel);
+	BinarySearchTree<T>::insertNode(subRoot, z);
+	insertFixup(subRoot, z);
 }
 
 
 
 template<class T>
 void RedBlackTree<T>::insertFixup(RBNode<T>* subRoot, RBNode<T>* z) {
+	cout << z->getParent()->getColor() << endl;
 	while (z->getParent()->getColor() == RED) {
 		if (z->getParent()->getParent()->getLeft() == z->getParent()) { // If z's parent is a left child
 			RBNode<T> * y = z->getParent()->getParent()->getRight();
@@ -99,6 +106,7 @@ void RedBlackTree<T>::insertFixup(RBNode<T>* subRoot, RBNode<T>* z) {
 			}
 		}
 	}
+	static_cast<RBNode<T>*>(this->getRoot())->setColor(BLACK);
 }
 
 
@@ -106,29 +114,23 @@ void RedBlackTree<T>::insertFixup(RBNode<T>* subRoot, RBNode<T>* z) {
 template<class T>
 void RedBlackTree<T>::removeNode(RBNode<T> * subRoot, RBNode<T> * z) {
 	if (z != this->sentinel) {
-		RBNode<T> * y;
-		// we find the position of z
-		RBNode<T> * parent = z->getParent();
-		bool isRoot = parent == this->sentinel;
-		bool isLeft = (parent->getLeft() == z);
-
+		RBNode<T> * y = z;
+		bool color = y->getColor();
+		bool hadTwoChildren = false;
+		// if z has two children, y will be z's successor
+		if (z->getLeft() != this->sentinel && z->getRight() != this->sentinel) {
+			y = getSuccessor(z);
+			color = y->getColor();
+			hadTwoChildren = true;
+		}
 		RBNode<T> * x = static_cast<RBNode<T> *>(BinarySearchTree<T>::removeNode(subRoot, z));
-		// z's position is now y's position, so we find y
-		if (isRoot) {
-			y = getRoot();
-		}
-		else if (isLeft) {
-			y = parent->getLeft();
-		}
-		else {
-			y = parent->getRight();
+		
+		if (hadTwoChildren) {
+			y->setColor(z->getColor());
 		}
 
-		if (y->getColor() == BLACK) {
-			removeFixUp(subRoot, x);
-		}
-		if (x != y) {
-			y->setColor(z->getColor());
+		if (color == BLACK) {
+			removeFixup(subRoot, x);
 		}
 	}
 }
@@ -142,6 +144,24 @@ template<class T>
 RBNode<T> * RedBlackTree<T>::search(BNode<T>* subRoot, T Key)
 {
 	return static_cast<RBNode<T> *>(BinarySearchTree<T>::search(subRoot, Key));
+}
+
+template<class T>
+void RedBlackTree<T>::print(RBNode<T>* subroot, int space) {
+	if (subroot != this->sentinel) {
+		print(subroot->getRight(), space + 1);
+		for (int i = 0; i < space; i++) {
+			cout << "   |";
+		}
+		cout << subroot->getKey();
+		if (subroot->getColor() == BLACK) {
+			cout << "B" << endl;
+		}
+		else {
+			cout << "R" << endl;
+		}
+		print(subroot->getLeft(), space + 1);
+	}
 }
  
 template<class T>
@@ -175,9 +195,10 @@ RBNode<T> * RedBlackTree<T>::getSentinel()
 }
 
 template<class T>
-void RedBlackTree<T>::removeFixUp(RBNode<T> * subRoot, RBNode<T> * x) {
-	while (x != getRoot() && x->getColor() == BLACK) {
-
+void RedBlackTree<T>::removeFixup(RBNode<T> * subRoot, RBNode<T> * x) {
+	while (x != this->root && x->getColor() == BLACK) {
+		cout << endl;
+		print(subRoot, 0);
 		// if x is a left child
 		if (x->getParent()->getLeft() == x) {
 			RBNode<T> * w = x->getParent()->getRight();
@@ -188,12 +209,7 @@ void RedBlackTree<T>::removeFixUp(RBNode<T> * subRoot, RBNode<T> * x) {
 				leftRotate(x->getParent());
 
 				// reset w to be x's sibling
-				if (x->getParent()->getRight() == x) {
-					w = x->getParent()->getRight();
-				}
-				else {
-					w = x->getParent()->getLeft();
-				}
+				w = x->getParent()->getRight();
 			}
 
 			// case 2
@@ -203,19 +219,23 @@ void RedBlackTree<T>::removeFixUp(RBNode<T> * subRoot, RBNode<T> * x) {
 			}
 
 			// case 3
-			else if (w->getRight()->getColor() == BLACK) {
-				w->getLeft()->setColor(BLACK);
-				w->setColor(RED);
-				rightRotate(w);
-			}
+			else {
+				if (w->getRight()->getColor() == BLACK) {
+					w->getLeft()->setColor(BLACK);
+					w->setColor(RED);
+					rightRotate(w);
+					w = x->getParent()->getRight();
+				}
 
-			// case 4
-			w->setColor(x->getParent()->getColor());
-			x->getParent()->setColor(BLACK);
-			w->getRight()->setColor(BLACK);
-			leftRotate(x->getParent());
-			x = getRoot();
+				// case 4
+				w->setColor(x->getParent()->getColor());
+				x->getParent()->setColor(BLACK);
+				w->getRight()->setColor(BLACK);
+				leftRotate(x->getParent());
+				x = getRoot();
+			}
 		}
+		// if x is a right child
 		else {
 			RBNode<T> * w = x->getParent()->getLeft();
 			// case 1
@@ -225,38 +245,37 @@ void RedBlackTree<T>::removeFixUp(RBNode<T> * subRoot, RBNode<T> * x) {
 				rightRotate(x->getParent());
 
 				// reset w to be x's sibling
-				if (x->getParent()->getLeft() == x) {
-					w = x->getParent()->getLeft();
-				}
-				else {
-					w = x->getParent()->getRight();
-				}
+				w = x->getParent()->getLeft();
 			}
 
 			// case 2
-			if (w->getRight()->getColor() == BLACK && w->getLeft()->getColor() == BLACK) {
+			if (w->getRight()->getColor() == BLACK && w->getLeft()->getColor() == BLACK ) {
 				w->setColor(RED);
 				x = x->getParent();
 			}
 
 			// case 3
-			else if (w->getLeft()->getColor() == BLACK) {
-				w->getRight()->setColor(BLACK);
-				w->setColor(RED);
-				leftRotate(w);
-			}
+			else {
+				if (w->getLeft()->getColor() == BLACK) {
+					w->getRight()->setColor(BLACK);
+					w->setColor(RED);
+					leftRotate(w);
+					w = x->getParent()->getLeft();
+				}
 
-			// case 4
-			w->setColor(x->getParent()->getColor());
-			x->getParent()->setColor(BLACK);
-			w->getLeft()->setColor(BLACK);
-			rightRotate(x->getParent());
-			x = getRoot();
+				// case 4
+				w->setColor(x->getParent()->getColor());
+				x->getParent()->setColor(BLACK);
+				w->getLeft()->setColor(BLACK);
+				rightRotate(x->getParent());
+				x = getRoot();
+			}
 		}
 	}
 
 
 	x->setColor(BLACK);
+	static_cast<RBNode<T> *>(this->sentinel)->setColor(BLACK);
 }
 
 
@@ -264,18 +283,22 @@ void RedBlackTree<T>::removeFixUp(RBNode<T> * subRoot, RBNode<T> * x) {
 template<class T>
 void RedBlackTree<T>::leftRotate(RBNode<T>* x) {
 	RBNode<T> * y = x->getRight();
+	x->setRight(y->getLeft());
+	if (y->getLeft() != this->sentinel) {
+		y->getLeft()->setParent(x);
+	}
 	y->setParent(x->getParent());
-	if (x->getParent()->getLeft() == x) {// If x is left child
+	if (x->getParent() == this->sentinel) {
+		this->root = y;
+	}
+	else if (x->getParent()->getLeft() == x) {// If x is left child
 		x->getParent()->setLeft(y);
 	}
 	else { // if x is right child
 		x->getParent()->setRight(y);
 	}
-	x->setRight(y->getLeft());
-	x->getRight()->setParent(x);
 	y->setLeft(x);
 	x->setParent(y);
-
 }
 
 
@@ -283,15 +306,20 @@ void RedBlackTree<T>::leftRotate(RBNode<T>* x) {
 template<class T>
 void RedBlackTree<T>::rightRotate(RBNode<T>* y) {
 	RBNode<T> * x = y->getLeft();
-	x->setParent(y->getParent());
-	if (y->getParent()->getLeft() == y) { // y is left child
-		y->getParent()->setLeft(x);
+	y->setLeft(x->getRight());
+	if (x->getRight() != this->sentinel) {
+		x->getRight()->setParent(y);
 	}
-	else { // y is right child
+	x->setParent(y->getParent());
+	if (y->getParent() == this->sentinel) {
+		this->root = x;
+	}
+	else if (y->getParent()->getRight() == y) {// If x is left child
 		y->getParent()->setRight(x);
 	}
-	y->setLeft(x->getRight());
-	y->getRight()->setParent(y);
+	else { // if x is right child
+		y->getParent()->setLeft(x);
+	}
 	x->setRight(y);
 	y->setParent(x);
 }

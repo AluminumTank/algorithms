@@ -23,9 +23,8 @@ int main() {
 	BinarySearchTree<int> tree;
 
 	// test insert & search
-	BNode<int> * root = tree.getRoot();
-	tree.insertNode(root, 64);
-	if(tree.search(root, 64) == NULL) {
+	tree.insertNode(tree.getRoot(), 64);
+	if(tree.search(tree.getRoot(), 64) == NULL) {
 		printf("insert failed\n");
 	}
 	else {
@@ -33,16 +32,40 @@ int main() {
 	}
 
 	// test search
-	if(tree.search(root, 102) != tree.getSentinel()) {
+	if(tree.search(tree.getRoot(), 102) != tree.getSentinel()) {
 		printf("search failed\n");
 	}
 	else {
 		printf("search succeded\n");
 	}
 
+	//for (int i = 0; i < 100; ++i) {
+	//	
+	//	if (i % 2 == 0) {
+	//		tree.insertNode(tree.getRoot(), i / 2);
+	//	}
+	//	else {
+	//		tree.insertNode(tree.getRoot(), -i / 2);
+	//	}
+	//	//tree.insertNode(tree.getRoot(), 20 - i);
+	//}
+	//
+
+	//tree.print(tree.getRoot(), 0);
+
 	RedBlackTree<int> rbTree;
+	rbTree.insertNode(rbTree.getRoot(), 20);
+	rbTree.insertNode(rbTree.getRoot(), 10);
+	rbTree.insertNode(rbTree.getRoot(), 30);
+	rbTree.insertNode(rbTree.getRoot(), 1);
+	rbTree.insertNode(rbTree.getRoot(), 15);
+	rbTree.insertNode(rbTree.getRoot(), 25);
+	rbTree.insertNode(rbTree.getRoot(), 40);
+	rbTree.insertNode(rbTree.getRoot(), 16);
+	rbTree.insertNode(rbTree.getRoot(), 26);
+	rbTree.print(rbTree.getRoot(), 0);
 	int tmp = 1;
-	while (isRedBlack(&rbTree).size() == 0, tmp != 0) {
+	while (isRedBlack(&rbTree).size() == 0 && tmp != 0) {
 		cout << "Enter an integer: ";
 		cin >> tmp;
 		// if number is greater than 0, we insert it; if it is less than zero, we
@@ -52,10 +75,14 @@ int main() {
 		} else if (tmp < 0) {
 			rbTree.removeNode(rbTree.getRoot(), rbTree.search(rbTree.getRoot(), -tmp));
 		}
+		cout << endl;
+		rbTree.print(rbTree.getRoot(), 0);
 	}
 
-	cout << isRedBlack(&rbTree);
-
+cout << isRedBlack(&rbTree);
+	string a;
+	getline(cin, a);
+	cout << a;
 	return 0;
 }
 
